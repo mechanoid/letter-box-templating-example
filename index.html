@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./letter-box.css">
+  <script src="./letter-box.js" async type="module"></script>
+</head>
+<body>
+  <h1>Letter Generator</h1>
+
+  <p>Select below, for which client you want to generate an invite:</p>
+
+  <template id="letter-box-template">
+    <slot name="salutation">
+      <h3>Dear {{first_name}} {{last_name}},</h3>
+    </slot>
+
+    <slot name="invite-text">
+      <p>We're happy to invite you to our annual Sales Conference ...</p>
+    </slot>
+
+    <a href="mailto://{{email}}">Send</a>
+  </template>
+
+  <!-- formal -->
+  <h2>Formal Letter</h2>
+  <letter-box class="formal" src="./MOCK_DATA.json" properties="id,first_name,last_name,email"></letter-box>
+
+  <!-- casual -->
+  <h2>Casual Letter</h2>
+  <letter-box class="casual" src="./MOCK_DATA.json" properties="id,first_name,last_name,email">
+    <h3 slot="salutation">Hi {{first_name}}!!</h3>
+    <p slot="invite-text">Hey, {{first_name}}, would love to see you at my party!!!</p>
+  </letter-box>
+</body>
+</html>
+
